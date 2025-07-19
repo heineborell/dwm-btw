@@ -19,7 +19,7 @@ static const char *colors[][3] = {
 };
 
 /* tagging */
-static const char *tags[] = {"a", "s", "w", "e", "5", "6", "7", "8", "9"};
+static const char *tags[] = {"a", "s", "w", "e"};
 
 static const Rule rules[] = {
     /* xprop(1):
@@ -69,13 +69,15 @@ static const char *dmenucmd[] = {
 static const char *termcmd[] = {"kitty", NULL};
 static const char *rofi[] = {
     "rofi", "-show", "drun", "-theme", "~/.config/rofi/config.rasi", NULL};
+static const char *firefox[] = {"firefox", NULL};
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     {MODKEY, XK_r, spawn, {.v = dmenucmd}},
     {MODKEY, XK_Return, spawn, {.v = termcmd}},
     {MODKEY, XK_d, spawn, {.v = rofi}},
-    {MODKEY, XK_b, togglebar, {0}},
+    {MODKEY, XK_b, spawn, {.v = firefox}},
+    {MODKEY, XK_u, togglebar, {0}},
     {MODKEY, XK_j, focusstack, {.i = +1}},
     {MODKEY, XK_k, focusstack, {.i = -1}},
     {MODKEY, XK_i, incnmaster, {.i = +1}},
