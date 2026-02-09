@@ -5,8 +5,9 @@ static const unsigned int borderpx = 1; /* border pixel of windows */
 static const unsigned int snap = 32;    /* snap pixel */
 static const int showbar = 1;           /* 0 means no bar */
 static const int topbar = 1;            /* 0 means bottom bar */
-static const char *fonts[] = {"JetBrainsMonoNL Nerd Font Mono:size=16"};
-static const char dmenufont[] = "monospace:size=15";
+static const char *fonts[] = {"Iosevka Nerd Font:size=22",
+                              "Noto Sans CJK KR:size=22", "Noto Sans:size=22"};
+static const char dmenufont[] = "monospace:size=18";
 static const char col_gray1[] = "#222222";
 static const char col_gray2[] = "#444444";
 static const char col_gray3[] = "#bbbbbb";
@@ -19,7 +20,7 @@ static const char *colors[][3] = {
 };
 
 /* tagging */
-static const char *tags[] = {"a", "s", "w", "e"};
+static const char *tags[] = {"a", "s", "w", "d"};
 
 static const Rule rules[] = {
     /* xprop(1):
@@ -66,29 +67,30 @@ static char dmenumon[2] =
 static const char *dmenucmd[] = {
     "dmenu_run", "-m",      dmenumon, "-fn",    dmenufont, "-nb",     col_gray1,
     "-nf",       col_gray3, "-sb",    col_cyan, "-sf",     col_gray4, NULL};
-static const char *termcmd[] = {"kitty", NULL};
+static const char *termcmd[] = {"alacritty", NULL};
+static const char *flameshotcmd[] = {"flameshot", "gui", NULL};
 static const char *rofi[] = {
     "rofi", "-show", "drun", "-theme", "~/.config/rofi/config.rasi", NULL};
 static const char *firefox[] = {"firefox", NULL};
 
 static const Key keys[] = {
     /* modifier                     key        function        argument */
-    {MODKEY, XK_r, spawn, {.v = dmenucmd}},
+    {MODKEY, XK_c, spawn, {.v = dmenucmd}},
     {MODKEY, XK_Return, spawn, {.v = termcmd}},
-    {MODKEY, XK_d, spawn, {.v = rofi}},
-    {MODKEY, XK_b, spawn, {.v = firefox}},
+    {MODKEY, XK_r, spawn, {.v = rofi}},
+    {MODKEY, XK_f, spawn, {.v = firefox}},
     {MODKEY, XK_u, togglebar, {0}},
-    {MODKEY, XK_j, focusstack, {.i = +1}},
-    {MODKEY, XK_k, focusstack, {.i = -1}},
+    {MODKEY, XK_h, focusstack, {.i = +1}},
+    {MODKEY, XK_l, focusstack, {.i = -1}},
     {MODKEY, XK_i, incnmaster, {.i = +1}},
     {MODKEY, XK_p, incnmaster, {.i = -1}},
-    {MODKEY, XK_h, setmfact, {.f = -0.05}},
-    {MODKEY, XK_l, setmfact, {.f = +0.05}},
+    {Mod1Mask, XK_h, setmfact, {.f = -0.05}},
+    {Mod1Mask, XK_l, setmfact, {.f = +0.05}},
     {MODKEY, XK_z, zoom, {0}},
     {MODKEY, XK_Tab, view, {0}},
     {MODKEY, XK_q, killclient, {0}},
     {MODKEY, XK_t, setlayout, {.v = &layouts[0]}},
-    {MODKEY, XK_f, setlayout, {.v = &layouts[1]}},
+    {MODKEY, XK_b, setlayout, {.v = &layouts[1]}},
     {MODKEY, XK_m, setlayout, {.v = &layouts[2]}},
     {MODKEY, XK_space, setlayout, {0}},
     {MODKEY | ShiftMask, XK_space, togglefloating, {0}},
@@ -98,7 +100,8 @@ static const Key keys[] = {
     {MODKEY, XK_period, focusmon, {.i = +1}},
     {MODKEY | ShiftMask, XK_comma, tagmon, {.i = -1}},
     {MODKEY | ShiftMask, XK_period, tagmon, {.i = +1}},
-    TAGKEYS(XK_a, 0) TAGKEYS(XK_s, 1) TAGKEYS(XK_w, 2) TAGKEYS(XK_e, 3)
+    {0, XK_F12, spawn, {.v = flameshotcmd}},
+    TAGKEYS(XK_a, 0) TAGKEYS(XK_s, 1) TAGKEYS(XK_w, 2) TAGKEYS(XK_d, 3)
         TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
             TAGKEYS(XK_9, 8){MODKEY | ShiftMask, XK_q, quit, {0}},
 };
